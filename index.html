@@ -8,38 +8,86 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Max Fit</title>
+    <script>
+        function myfunction(value) { 
+            const item = value.getBoundingClientRect(); 
+            return ( 
+                item.top >= 0 && 
+                item.left >= 0 && 
+                item.bottom <= ( 
+                    window.innerHeight || 
+                    document.documentElement.clientHeight) && 
+                item.right <= ( 
+                    window.innerWidth || 
+                    document.documentElement.clientWidth) 
+            ); 
+        } 
+  
+  
+        window.addEventListener('scroll', () => { 
+            const elementToCheck = document.getElementById('navigation'); 
+            const elementToRemove = document.getElementById('floating-button');
+
+            if (myfunction(elementToCheck)) { 
+                elementToRemove.style.display = 'none';
+            } else { 
+                elementToRemove.style.display = 'flex';
+            } 
+        }); 
+
+        function scrollToEelment(id){
+            if(id === 'top'){
+                window.scrollTo(0, 0);
+            }else{
+                const element = document.getElementById(id);
+                element.scrollIntoView();
+            }
+
+        }
+    </script>
 </head>
 <body>
-    <nav class="navigation">
-        <img class="logo" src="max-fit-logo.png" alt="Max fit logo">
-    </nav>
-    <div class="main">
-        <!-- <section class="home">
-            <div>
-                Home
+    <div class="container">
+        <nav class="navigation" id="navigation">
+            <div class="naviagtion-image">
+                <img class="logo" src="max-fit-logo.png" alt="Max fit logo">
             </div>
-        </section> -->
-        <section class="home-images">
-            <img class="welcome-text" src="come-to-be-max-fit.png">
-        </section>
-        <section class="about-us">
-            <div>
-                About Us
+            <div class="navigation-buttons">
+                <div class="navigation-button-home" onclick="scrollToEelment('home')">
+                    <p>Home</p>
+                </div>
+                <div class="navigation-button-trainers" onclick="scrollToEelment('trainers')">
+                    <p>Trainers</p>
+                </div>
+                <div class="navigation-button-about-us" onclick="scrollToEelment('about-us')">
+                    <p>About Us</p>
+                </div>
             </div>
-        </section>
-        <section class="trainers">
-            <div>
-                Our Team
+        </nav>
+        <div class="main">
+            <div class="home" id="home">
+                <p>Home</p>
             </div>
-        </section>
-        <section class="contact">
-            <div>
-                Contact
+            <div class="home-content">
+                <p>Home</p>
             </div>
-        </section>
+            <div class="trainers" id="trainers">
+                <p>Trainers</p>
+            </div>
+            <div class="trainers-content">
+                <p>Trainers</p>
+            </div>
+            <div class="about-us" id="about-us">
+                <p>About Us</p>
+            </div>
+            <div class="about-us-content">
+                <p>About Us</p>
+            </div>
+        </div>
     </div>
-    <footer>
-
-    </footer>
+    <button class="floating-button" onclick="scrollToEelment('top')" id="floating-button">
+        <span class="tooltip">Back to top.</span>
+        <span>&#129053;</span>
+    </button>
 </body>
 </html>
